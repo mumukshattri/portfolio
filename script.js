@@ -359,4 +359,65 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// ==========================================
+// 11. About & Contact — Scroll Reveal + Form
+// ==========================================
+(function () {
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.scroll-reveal, .scroll-reveal-stagger');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+            }
+        });
+    }, { threshold: 0.15 });
 
+    revealEls.forEach(el => observer.observe(el));
+
+    // Contact form — Supabase REST API
+    const SUPABASE_URL = 'https://wyhicxzawccvckstmapl.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5aGljeHphd2NjdmNrc3RtYXBsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5OTExMDYsImV4cCI6MjA4ODU2NzEwNn0.lS-0Lzv-BWw_i7yTAl_ueXCNpZbG7CVFFJLIgcxJsUI';
+
+    const form = document.getElementById('contact-form');
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('cf-name').value.trim();
+            const email = document.getElementById('cf-email').value.trim();
+            const message = document.getElementById('cf-message').value.trim();
+            const btnText = document.getElementById('cf-btn-text');
+            const spinner = document.getElementById('cf-spinner');
+            const submitBtn = document.getElementById('cf-submit');
+
+            // Loading state
+            btnText.style.display = 'none';
+            spinner.style.display = 'inline';
+            submitBtn.disabled = true;
+
+            try {
+                await fetch(`${SUPABASE_URL}/rest/v1/contact_requests`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`,
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify({ name, email, message })
+                });
+
+                // Show success
+                form.style.display = 'none';
+                document.getElementById('contact-success').style.display = 'flex';
+
+            } catch (err) {
+                console.error(err);
+                btnText.style.display = 'inline';
+                spinner.style.display = 'none';
+                submitBtn.disabled = false;
+                alert('Something went wrong. Please try again.');
+            }
+        });
+    }
+})();
