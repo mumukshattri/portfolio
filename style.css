@@ -409,6 +409,27 @@ h4 {
     font-size: 1.2rem;
 }
 
+/* Mobile nav fix */
+@media (max-width: 640px) {
+    .figma-navbar {
+        top: 12px;
+        width: 94%;
+        padding: 10px 16px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-actions .btn {
+        display: none;
+    }
+
+    .mobile-toggle {
+        display: block;
+    }
+}
+
 /* ==========================================================================
    Hero Section
    ========================================================================== */
