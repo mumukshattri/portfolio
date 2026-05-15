@@ -1172,6 +1172,8 @@ h4 {
    ========================================================================== */
 .contact-footer {
     padding-bottom: 40px;
+    overflow: hidden;
+    width: 100%;
 }
 
 .footer-top {
@@ -1213,17 +1215,18 @@ h4 {
 .footer-huge-name {
     font-family: var(--font-heading);
     font-weight: 900;
-    font-size: clamp(4rem, 14vw, 14rem);
+    font-size: 14vw;
     line-height: 1;
     text-align: center;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.02em;
     user-select: none;
     color: rgba(255, 255, 255, 0.08);
     -webkit-text-stroke: 1px rgba(255, 255, 255, 0.25);
     width: 100%;
-    overflow: hidden;
-    padding: 0 20px;
-    box-sizing: border-box;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 [data-theme="light"] .footer-huge-name {
