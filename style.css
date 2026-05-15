@@ -1213,17 +1213,22 @@ h4 {
 .footer-huge-name {
     font-family: var(--font-heading);
     font-weight: 900;
-    font-size: 19vw;
-    line-height: 0.75;
+    font-size: clamp(4rem, 14vw, 14rem);
+    line-height: 1;
     text-align: center;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.04em;
     user-select: none;
-    color: rgba(255, 255, 255, 0.03);
-    /* Subtle watermark behind */
+    color: rgba(255, 255, 255, 0.08);
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.25);
+    width: 100%;
+    overflow: hidden;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 [data-theme="light"] .footer-huge-name {
-    color: rgba(0, 0, 0, 0.03);
+    color: rgba(0, 0, 0, 0.05);
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.15);
 }
 
 /* ==========================================================================
